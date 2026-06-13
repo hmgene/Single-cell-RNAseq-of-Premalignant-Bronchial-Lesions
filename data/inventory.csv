@@ -1,0 +1,14 @@
+Bronch,Date,anatomi,Pathology,Clone,Count,Total,Cells,K5+,cells,(%,of,DAPI),Clone,count/103,total,cells,Clone,count/103,K5+,cells,H1,H2,H0,id,fastq_dir,fastq_prefix,cellranger_dir,flowcell_id
+10/4/19,LUL,1,101.3,1.15x104,cells,37.4,29.3,78.5,RS,good_repair,green,s9,191108_A00405_0164_AHMVMHDSXX,A,191108/A/outs/filtered_feature_bc_matrix,191108
+10/4/19,MC,1,115.3,2.05x104,cells,26.5,18.5,70.7,RS,good_repair,green,s10,191108_A00405_0164_AHMVMHDSXX,B,191108/B/outs/filtered_feature_bc_matrix,191108
+8/8/19,RB6,1,258,3x104,cells,44.7,28.3,64.13,RS,good_repair,green,s7,190913_A00405_0142_AHH2J7DSXX,3_RB6,190913/1_LB_1plus2/outs/filtered_feature_bc_matrix,190913
+11/7/19,RUL,1,226,3.85x104,cells,31,19.56,63,RS,good_repair,green,s12,191125_A00405_0172_AHNJCFDSXX,RUL,191125/RUL/outs/filtered_feature_bc_matrix,191125
+11/7/19,LUL,1,148.33,3x104,cells,29,16.4,56.8,RS,good_repair,green,s13,191125_A00405_0172_AHNJCFDSXX,LUL,191125/LUL/outs/filtered_feature_bc_matrix,191125
+1/8/19,LB6,5.6,197.3,4.35x104,cells,44.6,15,33.5,RS,good_repair,red,s4,190219_A00405_0081_BHGY2CDSXX,2_LB6,190219/2_LB6/outs/filtered_gene_bc_matrices/GRCh38,190219
+9/4/18,LUL,3,119.3,7.75x104,cells,54.46,5.08,9.55,MR,bad_repair,red,s1,180611_A00405_0027_BH5LT2DSXX,1_LUL,180611/1_LUL/outs/filtered_gene_bc_matrices/GRCh38,180518
+9/4/18,RUL,1,200.7,11.25x104,cells,68.2,6.03,8.63,MR,bad_repair,green,s2,180611_A00405_0027_BH5LT2DSXX,2_RUL,180611/2_RUL/outs/filtered_gene_bc_matrices/GRCh38,180518
+10/4/19,RML,7,72.7,13.6x104,cells,33.5,1.76,5.31,MR,bad_repair,red,s11,191108_A00405_0164_AHMVMHDSXX,C,191108/C/outs/filtered_feature_bc_matrix,191108
+1/10/19,RUL,5.5,138,31x104,cells,39.4,1.48,3.72,MR,bad_repair,red,s6,190219_A00405_0081_BHGY2CDSXX,5_CRVL,190219/5_CRVL/outs/filtered_gene_bc_matrices/GRCh38,190219
+1/10/19,MC,2,88.7,28.5x104,cells,46.7,1.03,2.22,MR,bad_repair,green,s5,190219_A00405_0081_BHGY2CDSXX,4_BMC,190219/4_BMC/outs/filtered_gene_bc_matrices/GRCh38,190219
+1/8/19,RB6,5.6,0,4.62x104,cells,37.9,0,0,RD,bad_repair,red,s3,190219_A00405_0081_BHGY2CDSXX,1_RB6,190219/1_RB6/outs/filtered_gene_bc_matrices/GRCh38,190219
+8/8/19,Lb1+2/3,3,0,1.06x104,cells,62.4,0,0,RD,bad_repair,red,s8,190913_A00405_0142_AHH2J7DSXX,1_LB_1plus2,190913/3_RB6/outs/filtered_feature_bc_matrix,190913
