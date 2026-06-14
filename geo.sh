@@ -1,6 +1,7 @@
 
 o=bigdata/geo/raw_files/
-r=/Volumes/exfat8t/kimhm/moumita/fastq
+#r=/Volumes/exfat8t/kimhm/moumita/fastq
+r=/media/hm/exfat8t/kimhm/moumita/fastq
 
 echo "
 10/4/19	LUL	s9	191108_A00405_0164_AHMVMHDSXX	A
@@ -17,8 +18,10 @@ echo "
 1/8/19	RB6	s3	190219_A00405_0081_BHGY2CDSXX	1_RB6
 8/8/19	Lb1+2/3	s8	190913_A00405_0142_AHH2J7DSXX	1_LB_1plus2
 " | grep -v "^$" | while read t x s d n;do
-    echo ">$s"
-    mkdir -p $o
-    rsync -avRn $r/./$d/$n*.gz $o/
-done
+    #mkdir -p $o
+    #rsync -avR $r/./$d/$n*.gz $o/
+    r1=`ls $o/$d/$n*_R1*.gz`
+    r2=`ls $o/$d/$n*_R2*.gz`
+    echo $r1 $r2
+done 
 
