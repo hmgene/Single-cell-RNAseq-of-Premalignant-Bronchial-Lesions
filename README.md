@@ -1,4 +1,6 @@
-# Gosh Lab Single-cell 
+# Ghosh Lab Single-cell Repository
+
+
 
 
 
