@@ -10,5 +10,5 @@ for f in *.{r,sh}; do
         "$f" > "$f.tmp"
         
     # 2. Overwrite the original file with the temporary one
-    #mv "$f.tmp" "$f"
+    mv "$f.tmp" "$f"
 done

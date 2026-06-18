@@ -24,19 +24,19 @@ tt@meta.data$dysplasia <- p$description[match(tt@meta.data$orig.ident, p$id)]
 tt@meta.data$patient <- p$patient[match(tt@meta.data$orig.ident, p$id)]
 
 x <- as.data.table(tt@meta.data)
-x <- x[, .N, by = .(seurat_clusters,patient,repairment,dysplasia,orig.ident)]
+x <- x[, .N, by = .(seurat_clusters,patient,selfrenewal,dysplasia,orig.ident)]
 setnames(x, "N", "count")
 setnames(x, "orig.ident", "sample")
-x[, repairment := factor(repairment, levels = c("bad_repair","good_repair"))]
+x[, selfrenewal := factor(selfrenewal, levels = c("low_selfrenewal","high_selfrenewal"))]
 x[, dysplasia := factor(dysplasia, levels = c("Non-dysplastic", "Dysplastic"))]
 
-fit <- x |> sccomp_estimate( formula_composition = ~ repairment * dysplasia + ( 1 | patient),
+fit <- x |> sccomp_estimate( formula_composition = ~ selfrenewal * dysplasia + ( 1 | patient),
   .sample = "sample", .cell_group = "seurat_clusters", abundance = "count", variational_inference = F,core=8) 
 res= fit |> sccomp_test()
 plots =  res |> plot()
 ggsave("figures/credible_interval_all.svg", plots$credible_intervals_1D)
 
-ggsave("figures/credible_interval_repairment.svg",
+ggsave("figures/credible_interval_selfrenewal.svg",
 plots$credible_intervals_1D[[1]] + labs( title = "Repair State Credible Intervals", y = "Cluster ID") + theme_minimal()  )
 
 ggsave("figures/credible_interval_dysplasia.svg",
@@ -44,12 +44,12 @@ plots$credible_intervals_1D[[2]] + labs( title = "Dysplasia State Credible Inter
 
 # sanity check
 library(ggplot2)
-p=ggplot(x, aes(x = repairment, y = count, fill = dysplasia)) +
+p=ggplot(x, aes(x = selfrenewal, y = count, fill = dysplasia)) +
   stat_summary(fun = mean, geom = "bar", position = "dodge") +
   facet_wrap(~ seurat_clusters)
-ggsave("figures/barplot_repairment_dysplasia.svg",p)
+ggsave("figures/barplot_selfrenewal_dysplasia.svg",p)
 
-y=subset(tt,subset= tt$seurat_clusters==4 & tt$dysplasia=="Dysplastic" & tt$repairment=="good_repair")
+y=subset(tt,subset= tt$seurat_clusters==4 & tt$dysplasia=="Dysplastic" & tt$selfrenewal=="high_selfrenewal")
 table(y$orig.ident)
 #s4 
 #350 
@@ -57,11 +57,11 @@ table(y$orig.ident)
 library(data.table)
 library(pheatmap)
 
-x[repairment == "good_repair", repairment := "high_selfrenewal"]
-x[repairment == "bad_repair",  repairment := "low_selfrenewal"]
-x[, repairment := factor(repairment)]
+x[selfrenewal == "high_selfrenewal", selfrenewal := "high_selfrenewal"]
+x[selfrenewal == "low_selfrenewal",  selfrenewal := "low_selfrenewal"]
+x[, selfrenewal := factor(selfrenewal)]
 dt <- as.data.table(x)
-x[, state := paste(repairment, dysplasia, sep = " / ")]
+x[, state := paste(selfrenewal, dysplasia, sep = " / ")]
 
 mat_dt <- dt[ , .(count = sum(count)), by = .(patient, state) ]
 mat <- dcast( mat_dt, state ~ patient, value.var = "count", fill = 0)

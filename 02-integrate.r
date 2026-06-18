@@ -24,7 +24,7 @@ d <- RunPCA(d)
 #d <- FindClusters(d, resolution = 0.4, cluster.name = "unintegrated_clusters")
 d = RunUMAP(d,dims=1:30,reduction = "pca", reduction.name = "umap.unintegrated")
 library(ggplot2)
-p=DimPlot(d, reduction = "umap.unintegrated", group.by = c("orig.ident", "repairment"))
+p=DimPlot(d, reduction = "umap.unintegrated", group.by = c("orig.ident", "selfrenewal"))
 ggsave(p,file="figures/umap_before_integration.svg",width=14,height=7)
 
 
@@ -36,7 +36,7 @@ d[["RNA"]] <- JoinLayers(d[["RNA"]])
 #d <- FindNeighbors(d, reduction = "integrated.cca", dims = 1:30)
 #d <- FindClusters(d, resolution = 0.8)
 d=RunUMAP(d, dims = 1:30, reduction = "integrated.cca")
-p=DimPlot(d, reduction = "umap", group.by = c("orig.ident", "repairment"))
+p=DimPlot(d, reduction = "umap", group.by = c("orig.ident", "selfrenewal"))
 ggsave(p,file="figures/umap_after_integration.svg",width=14,height=7)
 
 saveRDS(d,file=output)

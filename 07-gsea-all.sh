@@ -5,7 +5,7 @@ library(data.table)
 library(org.Hs.eg.db)
 
 j=c(0, 1, 2, 14, 15, 11, 17)
-edger <- fread("data/s13_repairment_DE.csv")
+edger <- fread("data/s13_selfrenewal_DE.csv")
 edger = edger[ cluster %in% j]
 sig <- edger[padj< 0.05 & abs(logFC) > 1]
 genes <- unique(sig$gene)   # adjust column name if needed
@@ -15,10 +15,10 @@ ego_bp<-enrichGO(gene=entrez_genes,OrgDb=org.Hs.eg.db,keyType="ENTREZID",ont="BP
 dotplot(ego_bp, showCategory = 20) + ggplot2::ggtitle("GO Biological Process Enrichment")
 
 p=barplot(ego_bp, showCategory = 20)
-ggsave(p,file="figures/gobp-s3s4epi-repairment-de-barplot.svg",height=15)
+ggsave(p,file="figures/gobp-s3s4epi-selfrenewal-de-barplot.svg",height=15)
 
 p=cnetplot(ego_bp, showCategory = 5)
-ggsave(p,file="figures/gobp-s3s4epi-repairment-de-network.svg")
+ggsave(p,file="figures/gobp-s3s4epi-selfrenewal-de-network.svg")
 
 heatplot(ego_bp, showCategory = 10)
 
@@ -30,7 +30,7 @@ gmt_df <- rbindlist(lapply(lapply(gmt_files, fgsea::gmtPathways),
     \(x) data.table(term = rep(names(x), lengths(x)), gene = unlist(x, use.names = FALSE)
 )))
 
-edger <- fread("data/s3s4_repairment_DE_core_epi.csv")
+edger <- fread("data/s3s4_selfrenewal_DE_core_epi.csv")
 sig <- edger[padj< 0.05 & abs(logFC) > 1]
 genes <- unique(sig$gene)   # adjust column name if needed
 res <- enricher( gene = genes, TERM2GENE = gmt_df[, .(term, gene)])
@@ -51,8 +51,8 @@ s3s4_dn=tt[ES < 0][head(order(pval), n=10), pathway]
 s3s4_pathways = c(s3s4_up,s3s4_dn)
 
 
-edger=fread("data/s13_repairment_DE.csv") 
-edger=fread("data/s3s4_repairment_DE.csv") 
+edger=fread("data/s13_selfrenewal_DE.csv") 
+edger=fread("data/s3s4_selfrenewal_DE.csv") 
 j=c(0, 1, 2, 14, 15, 11, 17)
 edger=edger[cluster%in%j]
 

@@ -10,10 +10,10 @@ results <- list()
 Idents(d1) <- "seurat_clusters"
 for (cl in levels(d1)) {
   obj <- subset(d1, idents = cl)
-  tab <- table(obj$repairment)
-  if (all(c("good_repair", "bad_repair") %in% names(tab)) && all(tab[c("good_repair", "bad_repair")] >= 3)) {
-    Idents(obj) <- obj$repairment
-    results[[cl]] <- FindMarkers( obj, ident.1 = "good_repair", ident.2 = "bad_repair", test.use = "wilcox")
+  tab <- table(obj$selfrenewal)
+  if (all(c("high_selfrenewal", "low_selfrenewal") %in% names(tab)) && all(tab[c("high_selfrenewal", "low_selfrenewal")] >= 3)) {
+    Idents(obj) <- obj$selfrenewal
+    results[[cl]] <- FindMarkers( obj, ident.1 = "high_selfrenewal", ident.2 = "low_selfrenewal", test.use = "wilcox")
   }
 }
 
@@ -25,8 +25,8 @@ all_res <- rbindlist(lapply(names(results), function(cl) {
   res
 }), fill = TRUE)
 setorder(all_res, padj)
-fwrite(all_res, "data/s13_repairment_DE.csv")
-#all_res=fread("data/s13_repairment_DE.csv")
+fwrite(all_res, "data/s13_selfrenewal_DE.csv")
+#all_res=fread("data/s13_selfrenewal_DE.csv")
 
 j=c(0, 1, 2, 14, 15, 11, 17)
 res_filt <- all_res[ padj < 0.01 & abs(logFC) > 1.5 & pmax(pct_good,pct_bad) > 0.5 ]
@@ -53,7 +53,7 @@ pdf("figures/heatmap_core_genes_epionly.pdf", width = 30, height = 5)
 Heatmap(mat,column_names_gp = gpar(col=colors))
 dev.off()
 
-fwrite(all_res[gene%in% core_genes & cluster %in% j], "data/s3s4_repairment_DE_core_epi.csv")
+fwrite(all_res[gene%in% core_genes & cluster %in% j], "data/s3s4_selfrenewal_DE_core_epi.csv")
 
 
 

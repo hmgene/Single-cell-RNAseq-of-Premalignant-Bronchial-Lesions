@@ -23,7 +23,7 @@ for ( i in 1:nrow(input)){
 
  
 d = merge(d.list[[1]],d.list[2:length(d.list)])
-d$repairment <- m[match(d$orig.ident, m$id), H2]
+d$selfrenewal <- m[match(d$orig.ident, m$id), H2]
 d[["percent.mt"]] <- PercentageFeatureSet(d, pattern = "^MT-")
 d[["percent.rb"]] <- PercentageFeatureSet(d, pattern = "^RP[SL]")
 
@@ -41,10 +41,10 @@ df <- d@meta.data
 df$mt_status <- ifelse(df$percent.mt > 25, "MT > 25%", "MT ≤ 25%")
 
 # MT
-p=ggplot(df, aes(x = orig.ident, y = percent.mt, fill = repairment)) +
+p=ggplot(df, aes(x = orig.ident, y = percent.mt, fill = selfrenewal)) +
   geom_violin(alpha = 0.7, color = NA) +
   geom_hline(yintercept = 25, color = "red", linetype = "dashed", size = 0.8) +
-  scale_fill_manual(values = c( "good_repair" = "#2C7BB6", "bad_repair"  = "#D7191C")) +
+  scale_fill_manual(values = c( "high_selfrenewal" = "#2C7BB6", "low_selfrenewal"  = "#D7191C")) +
   theme_classic() + theme( axis.text.x = element_text(angle = 45, hjust = 1), legend.position = "bottom")
 ggsave(p,file="figures/qc_mt.svg",width=7,height=4)
 

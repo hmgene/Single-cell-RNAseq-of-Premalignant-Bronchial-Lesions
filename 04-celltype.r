@@ -30,7 +30,7 @@ ggsave(p,file="figures/dotplot_moumita_markers.pdf",width=21,height=7)
 ## pathology
 pt=as.data.table(read_excel(input_pathology))
 d@meta.data$Description <- pt$Description[match(d@meta.data$orig.ident, pt$id)]
-d$DysRep = paste0(d$Description,d$repairment)
+d$DysRep = paste0(d$Description,d$selfrenewal)
 
 
 
@@ -44,7 +44,7 @@ mk[["moumita"]]$feature <- toupper(mk[["moumita"]]$feature)
 #devtools::install_github("satijalab/AzimuthAPI")
 #d <- CloudAzimuth(d);
 #meta <- data.frame(cell_id = colnames(d), d@meta.data[, c(
-#    "full_hierarchical_labels","azimuth_fine","repairment", "final_level_labels",
+#    "full_hierarchical_labels","azimuth_fine","selfrenewal", "final_level_labels",
 #    "azimuth_label", "final_level_confidence", "full_consistent_hierarchy"
 #)])
 #write.csv(meta, "data/meta_azimuth.csv", row.names = FALSE)
