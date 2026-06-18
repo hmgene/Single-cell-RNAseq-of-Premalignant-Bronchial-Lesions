@@ -1,0 +1,9 @@
+for f in *.{r,sh}; do
+    # 1. Edit the file and save the output to a temp file
+    sed -e "s/high_selfrenewal/high_selfrenewal/g" \
+        -e "s/low_selfrenewal/low_selfrenewal/g" \
+        -e "s/selfrenewal/selfrenewal/g" "$f" > "$f.tmp"
+        
+    # 2. Overwrite the original file with the temporary one
+    #mv "$f.tmp" "$f"
+done
