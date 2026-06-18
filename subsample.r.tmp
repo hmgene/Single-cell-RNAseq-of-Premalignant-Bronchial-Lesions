@@ -22,7 +22,7 @@ library(ggplot2)
 library(cowplot)
 
 features= unlist(strsplit(m$gene,","))
-a=VlnPlot(d[d$repairement=="good",], features,group.by="seurat_clusters", stack = TRUE, sort = TRUE, flip = F) +
+a=VlnPlot(d[d$selfrenewal=="good",], features,group.by="seurat_clusters", stack = TRUE, sort = TRUE, flip = F) +
      theme(legend.position = "none") + ggtitle("Target Genes by Cluster")
 
 b=VlnPlot(d[d$selfrenewal=="bad", features,group.by="seurat_clusters", stack = TRUE, sort = TRUE, flip = F) +
